@@ -25,14 +25,14 @@ mkdir -p $SXHKD
 
 #Create symlinks for bspwm config files/directories
 cd $BSPWM
-ln -s . $CONFIG/bspwmrc
-ln -s . $CONFIG/panel
-ln -s . $CONFIG/panel_bar
-ln -s . $CONFIG/panel_colors
+ln -s $CONFIG/bspwmrc .
+ln -s $CONFIG/panel .
+ln -s $CONFIG/panel_bar .
+ln -s $CONFIG/panel_colors .
 
 #Create symlinks for sxhkd config files/directories
 cd $SXHKD
-ln -s . $CONFIG/sxhkdrc
+ln -s $CONFIG/sxhkdrc .
 
 #Setup necessary variables
 sudo su -c "echo PANEL_FIFO="/tmp/panel-fifo" >> /etc/profile"
