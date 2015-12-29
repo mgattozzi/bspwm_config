@@ -6,13 +6,27 @@ configuration files in one directory making it easier to make changes
 as well as using the git repositories of bspwm and other programs as
 submodules.
 
-# Installation
+Supported Distros:
+- Ubuntu
+- Arch
 
-This script assumes you have all of the needed dev packages installed
-until I change the script
+If you want others supported please put in a PR or an issue
+
+### Installation
+
+This script assumes you login via tty on Arch Linux or a login menu on
+Ubuntu
 
 ```bash
 git clone https://github.com/mgattozzi/bspwm_config.git
 cd bspwm_config
-./install.sh
+bash install.sh
 ```
+
+### Issues
+If there are missing packages needed for installation please file a bug
+report or submit a PR with the fixed script
+
+### Contact
+Email: mgattozzi@gmail.com
+Twitter: @mgattozzi
