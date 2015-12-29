@@ -1,5 +1,10 @@
 #!/bin/sh
 
+#Global Variables
+CONFIG=$(pwd)
+BSPWM=$HOME/.config/bspwm
+SXHKD=$HOME/.config/sxhkd
+
 #Install necessary programs
 
 #Update Submodules
@@ -15,17 +20,19 @@ cd sutils && make && sudo make install && cd ..
 cd bspwm && make && sudo make install && cd ..
 
 #Create needed directories
-mkdir -p $HOME/.config/bspwm
-mkdir -p $HOME/.config/sxhkd
+mkdir -p $BSPWM
+mkdir -p $SXHKD
 
 #Create symlinks for bspwm config files/directories
-ln -s bspwmrc $HOME/.config/bspwm/
-ln -s panel $HOME/.config/bspwm/
-ln -s panel_bar $HOME/.config/bspwm/
-ln -s panel_colors $HOME/.config/bspwm/
+cd $BSPWM
+ln -s . $CONFIG/bspwmrc
+ln -s . $CONFIG/panel
+ln -s . $CONFIG/panel_bar
+ln -s . $CONFIG/panel_colors
 
 #Create symlinks for sxhkd config files/directories
-ln -s sxhkdrc $HOME/.config/sxhkd
+cd $SXHKD
+ln -s . $CONFIG/sxhkdrc
 
 #Setup necessary variables
 sudo su -c "echo PANEL_FIFO="/tmp/panel-fifo" >> /etc/profile"
