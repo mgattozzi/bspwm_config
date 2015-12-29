@@ -33,6 +33,10 @@ ln -s $CONFIG/panel_colors .
 #Create symlinks for sxhkd config files/directories
 cd $SXHKD
 ln -s $CONFIG/sxhkdrc .
+
+#Symlink wallpaper to Home Directory
+cd $HOME
+ln -s $CONFIG/.wallpaper.jpg .
 cd $CONFIG
 
 #Setup necessary variables
