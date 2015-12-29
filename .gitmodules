@@ -1,0 +1,18 @@
+[submodule "bspwm"]
+	path = bspwm
+	url = git@github.com:baskerville/bspwm.git
+[submodule "xdo"]
+	path = xdo
+	url = git@github.com:baskerville/xdo.git
+[submodule "sxhkd"]
+	path = sxhkd
+	url = git@github.com:baskerville/sxhkd.git
+[submodule "xtitle"]
+	path = xtitle
+	url = git@github.com:baskerville/xtitle.git
+[submodule "sutils"]
+	path = sutils
+	url = git@github.com:baskerville/sutils.git
+[submodule "bar"]
+	path = bar
+	url = git@github.com:LemonBoy/bar.git
