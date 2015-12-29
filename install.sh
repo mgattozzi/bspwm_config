@@ -33,7 +33,17 @@ ln -s $CONFIG/panel_colors .
 #Create symlinks for sxhkd config files/directories
 cd $SXHKD
 ln -s $CONFIG/sxhkdrc .
+cd $CONFIG
 
 #Setup necessary variables
-sudo su -c "echo PANEL_FIFO="/tmp/panel-fifo" >> /etc/profile"
-sudo su -c "echo PATH=$PATH:$HOME/.config/bspwm >> /etc/profile"
+sudo su -c 'echo PANEL_FIFO="/tmp/panel-fifo" >> /etc/profile'
+sudo su -c 'echo PATH=$PATH:$HOME/.config/bspwm >> /etc/profile'
+
+#Allow logging in via bspwm
+sudo cp bspwm/contrib/freedesktop/bspwm.desktop /usr/share/xsessions/
+
+#Arch Linux
+#touch $HOME/.xinitrc
+#echo 'sxhkd &' >> $HOME/.xinitrc
+#echo 'exec bspwm' >> $HOME/.xinitrc
+
