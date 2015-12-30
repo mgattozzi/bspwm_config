@@ -60,8 +60,8 @@ ln -s $CONFIG/.wallpaper.jpg . &&
 cd $CONFIG &&
 
 #Setup necessary variables
-sudo su -c 'echo PANEL_FIFO="/tmp/panel-fifo" >> /etc/profile' &&
-sudo su -c 'echo PATH=$PATH:$HOME/.config/bspwm >> /etc/profile'
+sudo su -c 'echo export PANEL_FIFO="/tmp/panel-fifo" >> /etc/profile' &&
+sudo su -c 'echo export PATH=$PATH:$HOME/.config/bspwm >> /etc/profile'
 
 #Allow logging in via bspwm
 if [[ $OS == "Ubuntu" ]]
