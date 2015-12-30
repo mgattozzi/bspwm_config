@@ -20,7 +20,7 @@ fi
 if [[ $OS == "Ubuntu" ]]
 then
   sudo apt-get update
-  sudo apt-get install build-essential git bash xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libx11-xcb-dev libxtest-dev libxcb-xtest0-dev
+  sudo apt-get install build-essential git bash xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libx11-xcb-dev libxcb-xtest0-dev
 elif [[ $OS == "Arch" ]]
 then
   sudo pacman -Syy
