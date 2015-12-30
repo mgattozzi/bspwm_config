@@ -72,5 +72,5 @@ then
   touch $HOME/.xinitrc
   echo 'sxhkd &' >> $HOME/.xinitrc
   echo 'exec bspwm' >> $HOME/.xinitrc
-  echo 'Check your .xinitrc to make sure it's setup properly'
+  echo "Check your .xinitrc to make sure it's setup properly"
 fi
