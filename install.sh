@@ -40,8 +40,8 @@ cd sutils && make && sudo make install && cd ..
 cd bspwm && make && sudo make install && cd ..
 
 #Create needed directories
-kdir -p $BSPWM
-kdir -p $SXHKD
+mkdir -p $BSPWM
+mkdir -p $SXHKD
 
 #Create symlinks for bspwm config files/directories
 cd $BSPWM
