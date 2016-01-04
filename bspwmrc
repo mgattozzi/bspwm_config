@@ -4,11 +4,8 @@
 sxhkd &
 panel &
 feh --bg-fill ~/.wallpaper.jpg &
-xrandr --output LVDS1 --primary &
-xrandr --output HDMI1 --mode 1920x1080 --right-of LVDS1 &
-
-#Secondary Monitor Config
-bspc monitor ^1 --reset-desktops a b c
+xrandr --output LVDS1 --primary
+xrandr --output HDMI1 --mode 1920x1080 --right-of LVDS1
 bspc config -m ^1 top_padding 15
 
 #Main Config
@@ -23,7 +20,24 @@ bspc config gapless_monocle      true
 bspc config focus_by_distance    true
 bspc config history_aware_focus  true
 
-bspc monitor -d dev web music docs misc
+if (xrandr | grep "HDMI1 connected" > /dev/null)
+then
+  xrandr --output HDMI1 --mode 1920x1080 --right-of LVDS1
+  bspc monitor HDMI1 -d web music docs
+  bspc monitor LVDS1 -d dev misc
+else
+  bspc monitor -d dev web music docs misc
+fi
 
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+#Check to see if monitor is there every 10 minutes
+while [ true ]
+do
+  if (xrandr | grep "HDMI1 connected" > /dev/null)
+    xrandr --output HDMI1 --mode 1920x1080 --right-of LVDS1
+    bspc monitor HDMI1 -d web music docs
+    bspc monitor LVDS1 -d dev misc
+  else
+    bspc monitor -d dev web music docs misc
+  fi
+  sleep 10m
+done
