@@ -62,17 +62,17 @@ super + {_,shift + }{h,j,k,l}
 super + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
-# focus the next/previous node
-super + {_,shift + }c
-	bspc node -f {next,prev}
+# focus the next node
+super + Tab
+	bspc node -f next
 
 # focus the next/previous desktop
 super + bracket{left,right}
 	bspc desktop -f {prev,next}
 
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
+# focus the next monitor
+super + grave
+	bspc monitor -f next
 
 # focus the older or newer node in the focus history
 super + {o,i}
