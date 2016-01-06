@@ -20,15 +20,6 @@ bspc config gapless_monocle      true
 bspc config focus_by_distance    true
 bspc config history_aware_focus  true
 
-if (xrandr | grep "HDMI1 connected" > /dev/null)
-then
-  xrandr --output HDMI1 --mode 1920x1080 --right-of LVDS1
-  bspc monitor HDMI1 -d web music docs
-  bspc monitor LVDS1 -d dev misc
-else
-  bspc monitor -d dev web music docs misc
-fi
-
 #Check to see if monitor is there every 10 minutes
 while [ true ]
 do
@@ -37,6 +28,7 @@ do
     bspc monitor HDMI1 -d web music docs
     bspc monitor LVDS1 -d dev misc
   else
+    bspc wm -r HDMI1
     bspc monitor -d dev web music docs misc
   fi
   sleep 10m
