@@ -1,5 +1,6 @@
 #!/bin/bash
 set -euo pipefail
+
 #Global Variables
 CONFIG=$(pwd)
 BSPWM=$HOME/.config/bspwm
