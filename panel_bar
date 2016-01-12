@@ -19,7 +19,7 @@ Battery() {
 Volume() {
   MASTERLEV=$(amixer get Master | sed -n 's/^.*\[\([0-9]\+\)%.*$/\1/p'| uniq)
   MASTERMUT=$(amixer get Master | grep "\[*\]" | awk -v x=6 '{print $x}' | tr -d '[]')
-  echo "Volume Status: $MASTERMUT Volume Level: $MASTERLEV"
+  printf %s "Volume Status: $MASTERMUT Volume Level: $MASTERLEV"
 }
 
 while read -r line ; do

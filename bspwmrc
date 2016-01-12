@@ -20,12 +20,33 @@ bspc config gapless_monocle      true
 bspc config focus_by_distance    true
 bspc config history_aware_focus  true
 
+#Remove all windows by default and add later
+bspc wm -r HDMI1
+bspc wm -r LVDS1
+
 if (xrandr | grep "HDMI1 connected" > /dev/null)
-  xrandr --output HDMI1 --mode 1920x1080 --right-of LVDS1
+then
+  if ( ! (bspc query -M | grep LVDS1 > /dev/null) && true)
+  then
+    bspc wm --add-monitor LVDS1 1366x768+0+0
+  fi
+  if ( ! (bspc query -M | grep HDMI1 > /dev/null) && true)
+  then
+    bspc wm --add-monitor HDMI1 1920x1080+1366+0
+  fi
   bspc monitor HDMI1 -d web music docs
   bspc monitor LVDS1 -d dev misc
+  bspc monitor -f HDMI
+  bspc config top_padding 15
 else
-  bspc wm -r HDMI1
+  if ( ! (bspc query -M | grep LVDS1 > /dev/null) && true)
+  then
+    bspc wm --add-monitor LVDS1 1366x768+0+0
+  fi
+  if ( (bspc query -M | grep HDMI1 > /dev/null) && true)
+  then
+    bspc wm -r HDMI1
+  fi
   bspc monitor LVDS1 -d dev web music docs misc
 fi
 
@@ -33,11 +54,19 @@ fi
 while [ true ]
 do
   if (xrandr | grep "HDMI1 connected" > /dev/null)
-    xrandr --output HDMI1 --mode 1920x1080 --right-of LVDS1
+    if ( ! (bspc query -M | grep HDMI1 > /dev/null) && true)
+    then
+      bspc wm --add-monitor HDMI1 1920x1080+1366+0
+    fi
     bspc monitor HDMI1 -d web music docs
     bspc monitor LVDS1 -d dev misc
+    bspc monitor -f HDMI
+    bspc config top_padding 15
   else
-    bspc wm -r HDMI1
+    if ( (bspc query -M | grep HDMI1 > /dev/null) && true)
+    then
+      bspc wm -r HDMI1
+    fi
     bspc monitor LVDS1 -d dev web music docs misc
   fi
   sleep 10m
