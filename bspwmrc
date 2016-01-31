@@ -49,25 +49,3 @@ else
   fi
   bspc monitor LVDS1 -d dev web music docs misc
 fi
-
-#Check to see if monitor is there every 10 minutes
-while [ true ]
-do
-  if (xrandr | grep "HDMI1 connected" > /dev/null)
-    if ( ! (bspc query -M | grep HDMI1 > /dev/null) && true)
-    then
-      bspc wm --add-monitor HDMI1 1920x1080+1366+0
-    fi
-    bspc monitor HDMI1 -d web music docs
-    bspc monitor LVDS1 -d dev misc
-    bspc monitor -f HDMI
-    bspc config top_padding 15
-  else
-    if ( (bspc query -M | grep HDMI1 > /dev/null) && true)
-    then
-      bspc wm -r HDMI1
-    fi
-    bspc monitor LVDS1 -d dev web music docs misc
-  fi
-  sleep 10m
-done
