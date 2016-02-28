@@ -52,8 +52,6 @@ mkdir -p $SXHKD
 cd $BSPWM
 ln -s $CONFIG/bspwmrc .
 ln -s $CONFIG/panel .
-ln -s $CONFIG/panel_bar .
-ln -s $CONFIG/panel_colors .
 
 #Create symlinks for sxhkd config files/directories
 cd $SXHKD

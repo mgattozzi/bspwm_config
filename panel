@@ -1,31 +1,29 @@
-#! /bin/sh
+#!/usr/bin/bash
 
-if xdo id -a "$PANEL_WM_NAME" > /dev/null ; then
-	printf "%s\n" "The panel is already running." >&2
-	exit 1
-fi
+#Source Color Scheme
+. panel_colors
 
-trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+#Define the battery
+Battery() {
+  echo $(acpi --battery | cut -d, -f2)
+}
+Date() {
+	date | awk '{print $1 " " $2 " " $3 " " $4 }'
+}
 
-[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
-mkfifo "$PANEL_FIFO"
+DiskUsage() {
+  df -m | grep /dev/sda1 | awk '{print $5}'
+}
 
-bspc config top_padding $PANEL_HEIGHT
-bspc subscribe report > "$PANEL_FIFO" &
-xtitle -sf 'T%s' > "$PANEL_FIFO" &
-clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+Desktops() {
+  QUERY=$(bspc query -D | sed ':a;N;$!ba;s/\n/  /g')
+  ACTIVE=$(bspc query --desktops --desktop focused)
+  printf " %s " "$QUERY" | sed -e "s/ $ACTIVE /%{F#3a3a3a}%{B#d0d0d0} $ACTIVE %{F-}%{B-}/"
+}
 
-. /home/michael/.config/bspwm/panel_colors
 
-cat "$PANEL_FIFO" | panel_bar | lemonbar -a 32 -n "$PANEL_WM_NAME" -g x$PANEL_HEIGHT -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
-
-wid=$(xdo id -a "$PANEL_WM_NAME")
-tries_left=20
-while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
-	sleep 0.05
-	wid=$(xdo id -a "$PANEL_WM_NAME")
-	tries_left=$((tries_left - 1))
+# Print the percentage
+while true; do
+  echo "%{l} $(Desktops)%{c}$(Date)%{r}Disk: $(DiskUsage) Batt: $(Battery)"
+        sleep 0.01;
 done
-[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
-
-wait

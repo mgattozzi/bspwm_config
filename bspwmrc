@@ -1,8 +1,6 @@
 #! /bin/sh
 
 #Autostart Keybindings, Panel, Background, External Monitor
-sxhkd &
-panel &
 feh --bg-fill ~/.wallpaper.jpg &
 xrandr --output LVDS1 --primary
 xrandr --output HDMI1 --mode 1920x1080 --right-of LVDS1
