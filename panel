@@ -1,11 +1,8 @@
 #!/usr/bin/bash
 
-#Source Color Scheme
-. panel_colors
-
 #Define the battery
 Battery() {
-  echo $(acpi --battery | cut -d, -f2)
+  echo $(acpi --battery | tail -n 1 | cut -d, -f2)
 }
 Date() {
 	date | awk '{print $1 " " $2 " " $3 " " $4 }'
