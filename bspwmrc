@@ -1,28 +1,6 @@
 #! /bin/sh
 
-#Autostart Keybindings, Panel, Background, External Monitor
-if (xrandr | grep "HDMI1 connected" > /dev/null && xrandr | grep "VGA1 connected" > /dev/null)
-then
-  xrandr --output LVDS1 --off
-  xrandr --output HDMI1 --auto --primary
-  xrandr --output VGA1 --auto --right-of HDMI1
-  bspc wm --remove-monitor LVDS1
-  bspc wm --remove-monitor HDMI1
-  bspc wm --remove-monitor VGA1
-  bspc monitor HDMI1 --add-desktops dev misc
-  bspc monitor VGA1 --add-desktops web music docs
-  bspc monitor -d HMDI1
-  bspc monitor LVDS1 -r
-  bspc config top_padding 15
-  bspc monitor -d HMDI1
-else
-  xrandr --output LVDS1 --auto --primary
-  bspc wm --remove-monitor HDMI1
-  bspc wm -remove-monitor LVDS1
-  bspc wm -remove-monitor VGA1
-  bspc monitor LVDS1 --add-desktops dev misc web music docs
-fi
-bspc config -m ^1 top_padding 15
+bspc monitor eDP-1 -d dev misc web music docs
 
 #Program Rules
 bspc rule -a "chromium" desktop=^3
@@ -30,9 +8,9 @@ bspc rule -a "spotify" desktop=^4
 
 #Main Config
 bspc monitor -f primary
-bspc config border_width         2
-bspc config window_gap          12
-bspc config top_padding         15
+bspc config border_width         4
+bspc config window_gap          15
+bspc config top_padding         35
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
@@ -42,18 +20,11 @@ bspc config history_aware_focus  true
 
 #Wallpaper
 feh --bg-fill ~/.wallpaper.jpg &
-#Start up the bar
-~/.config/bspwm/panel|lemonbar -p -F "#d0d0d0" -B "#3a3a3a"&
-#Start up key bindings and programs
-sxhkd &
-chromium &
-if (xrandr | grep "HDMI1 connected" > /dev/null && xrandr | grep "VGA1 connected" > /dev/null)
-then
-  bspc monitor -f HDMI1
-  urxvt &
-else
-  urxvt &
-fi
 
-sleep 60
-./bin/bluetooth.sh
+#Start up the bar
+#Note lemonbar is the xft patch version from the AUR
+~/.config/bspwm/panel|lemonbar -g 3840x30 -p -F "#d0d0d0" -B "#3a3a3a" -f mononoki-Regular:size=18 &
+sxhkd &
+chromium --force-device-scale-factor=2 &
+spotify  --force-device-scale-factor=2 &
+urxvt &
