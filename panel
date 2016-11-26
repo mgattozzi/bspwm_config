@@ -2,19 +2,19 @@
 
 #Define the battery
 Battery() {
-  echo $(acpi --battery | tail -n 1 | cut -d, -f2)
+  echo $(acpi --battery | head -n 1 | cut -d, -f2)
 }
 Date() {
 	date | awk '{print $1 " " $2 " " $3 " " $4 }'
 }
 
 DiskUsage() {
-  df -m | grep /dev/sda1 | awk '{print $5}'
+  df -m | grep /dev/sda2 | awk '{print $5}'
 }
 
 Desktops() {
-  QUERY=$(bspc query -D | sed ':a;N;$!ba;s/\n/  /g')
-  ACTIVE=$(bspc query --desktops --desktop focused)
+  QUERY=$(bspc query -T -m | jq -c '.["desktops"] | map(."name")' | tr -d \" | tr -d [ | tr -d ] | sed 's/\,/  /g')
+  ACTIVE=$(bspc query -T -d | jq -c '."name"' | sed 's/\"//g')
   printf " %s " "$QUERY" | sed -e "s/ $ACTIVE /%{F#3a3a3a}%{B#d0d0d0} $ACTIVE %{F-}%{B-}/"
 }
 

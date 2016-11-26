@@ -29,20 +29,8 @@ then
   sudo pacman -Syy
   sudo pacman -S git bash libxcb xcb-util xcb-util-wm xcb-util-keysyms alsa-libbase-devel xorg-xinit xorg-server xorg-server-common xorg-server-devel xorg-server-utils xorg-xinput
   #Programs used in scripts
-  sudo pacman -S terminator dmenu feh
+  sudo pacman -S rxvt-unicode dmenu feh
 fi
-
-#Update Submodules
-git submodule init
-git submodule update
-
-# Install the programs
-cd xdo && make && sudo make install && cd ..
-cd bar && make && sudo make install && cd ..
-cd sxhkd && make && sudo make install && cd ..
-cd xtitle && make && sudo make install && cd ..
-cd sutils && make && sudo make install && cd ..
-cd bspwm && make && sudo make install && cd ..
 
 #Create needed directories
 mkdir -p $BSPWM
