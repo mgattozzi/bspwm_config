@@ -1,6 +1,21 @@
 #! /bin/sh
-
-bspc monitor eDP-1 -d dev misc web music docs
+#xrandr | grep HDMI-1
+#if [ $? -eq 0 ]; then
+    #xrandr --output HDMI-1 --auto --output eDP-1 --off
+    #bspc monitor eDP-1 -r
+    #bspc monitor HDMI-1 -d dev misc web music docs
+    #~/.config/bspwm/panel|lemonbar -g 1920x20 -p -F "#c5c8c6" -B "#1d1f21" -f mononoki-Regular:size=12 &
+    #bspc config top_padding 25
+    #chromium &
+    #spotify &
+    #xrdb ~/.Xresource.monitor
+#else
+    bspc monitor eDP-1 -d dev misc web music docs
+    ~/.config/bspwm/panel|lemonbar -g 3840x30 -p -F "#c5c8c6" -B "#1d1f21" -f mononoki-Regular:size=18 &
+    bspc config top_padding 35
+    chromium --force-device-scale-factor=2 &
+    spotify  --force-device-scale-factor=2 &
+#fi
 
 #Program Rules
 bspc rule -a "chromium" desktop=^3
@@ -10,7 +25,6 @@ bspc rule -a "spotify" desktop=^4
 bspc monitor -f primary
 bspc config border_width         4
 bspc config window_gap          15
-bspc config top_padding         35
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
@@ -23,8 +37,5 @@ feh --bg-fill ~/.wallpaper.jpg &
 
 #Start up the bar
 #Note lemonbar is the xft patch version from the AUR
-~/.config/bspwm/panel|lemonbar -g 3840x30 -p -F "#d0d0d0" -B "#3a3a3a" -f mononoki-Regular:size=18 &
 sxhkd &
-chromium --force-device-scale-factor=2 &
-spotify  --force-device-scale-factor=2 &
 urxvt &
