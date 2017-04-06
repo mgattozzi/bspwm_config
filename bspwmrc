@@ -1,25 +1,26 @@
 #! /bin/sh
-#xrandr | grep HDMI-1
-#if [ $? -eq 0 ]; then
-    #xrandr --output HDMI-1 --auto --output eDP-1 --off
-    #bspc monitor eDP-1 -r
-    #bspc monitor HDMI-1 -d dev misc web music docs
-    #~/.config/bspwm/panel|lemonbar -g 1920x20 -p -F "#c5c8c6" -B "#1d1f21" -f mononoki-Regular:size=12 &
-    #bspc config top_padding 25
-    #chromium &
-    #spotify &
-    #xrdb ~/.Xresource.monitor
-#else
-    bspc monitor eDP-1 -d dev misc web music docs
-    ~/.config/bspwm/panel|lemonbar -g 3840x30 -p -F "#c5c8c6" -B "#1d1f21" -f mononoki-Regular:size=18 &
-    bspc config top_padding 35
-    chromium --force-device-scale-factor=2 &
-    spotify  --force-device-scale-factor=2 &
-#fi
 
 #Program Rules
 bspc rule -a "chromium" desktop=^3
 bspc rule -a "spotify" desktop=^4
+bspc rule -a "discord" desktop=^6
+
+xrandr | grep HDMI-1
+
+# if [ $? -eq 0 ]; then
+#     xrandr --output HDMI-1 --auto --output eDP-1 --off
+#     bspc monitor eDP-1 -r
+#     bspc monitor HDMI-1 -d dev misc web music docs discord
+#     bspc config top_padding 25
+#     chromium &
+#     spotify &
+# else
+
+    bspc monitor eDP-1 -d dev misc web music docs discord
+    bspc config top_padding 35
+    chromium --force-device-scale-factor=2 &
+    spotify --force-device-scale-factor=2 &
+#fi
 
 #Main Config
 bspc monitor -f primary
@@ -35,7 +36,12 @@ bspc config history_aware_focus  true
 #Wallpaper
 feh --bg-fill ~/.wallpaper.jpg &
 
+xrdb ~/.Xresource.monitor &
+# Japanese Input
+fcitx -d &
+# discord &
+
 #Start up the bar
-#Note lemonbar is the xft patch version from the AUR
 sxhkd &
 urxvt &
+polybar main &
