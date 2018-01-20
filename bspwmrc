@@ -8,9 +8,9 @@ bspc rule -a "discord" desktop=^6
 xrandr | grep HDMI-1
 
 # if [ $? -eq 0 ]; then
-#     xrandr --output HDMI-1 --auto --output eDP-1 --off
-#     bspc monitor eDP-1 -r
-#     bspc monitor HDMI-1 -d dev misc web music docs discord
+#     xrandr --output HDMI-1 --mode 2560x1080
+#     bspc monitor eDP-1 -d dev misc web music docs
+#     bspc monitor HDMI-1 -d pres
 #     bspc config top_padding 25
 #     chromium &
 #     spotify &
@@ -18,7 +18,8 @@ xrandr | grep HDMI-1
 
     bspc monitor eDP-1 -d dev misc web music docs discord
     bspc config top_padding 35
-    chromium --force-device-scale-factor=2 &
+    firefox &
+    run_keybase &
     spotify --force-device-scale-factor=2 &
 #fi
 
