@@ -44,5 +44,5 @@ fcitx -d &
 
 #Start up the bar
 sxhkd &
-urxvt &
+alacritty &
 polybar main &
